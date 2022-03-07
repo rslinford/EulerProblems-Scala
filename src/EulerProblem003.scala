@@ -1,4 +1,4 @@
-object EulerProblem002 {
+object EulerProblem003 {
   def sumDivisibleBy(n: Int, target: Int): Int = {
     var p = target / n
     return n * (p * (p + 1)) / 2
