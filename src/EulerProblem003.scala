@@ -1,5 +1,15 @@
 object EulerProblem003 {
 
+  def testAnswer(anAnswer: Long): Unit = {
+    var knownAnswer = 6857
+    if (anAnswer == knownAnswer) {
+      println("Yay!")
+    }
+    else {
+      println("Rats!")
+    }
+  }
+
   def isPrimeUglyVersionRecursive(n:Long): Boolean = {
     var p = 3L
     if (n == 1) {
@@ -24,7 +34,6 @@ object EulerProblem003 {
     var isPrime = false;
 
     i = target / 2 - 1 // half target to count backwards
-//    i = 10000L
     answer = 0L
     while (answer == 0) {
       i -= 1;
@@ -47,7 +56,8 @@ object EulerProblem003 {
         answer = i
       }
     }
-    println("6857 Answer Euler 001: " + answer)
+
+    testAnswer(answer)
   }
 }
 
