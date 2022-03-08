@@ -15,7 +15,7 @@ object EulerProblem003 {
     return isPrimeUglyVersionRecursive(n%2);
   }
 
-  // What is the largest prime factor of the number 600851475143 ?
+  // What is the largest prime factor of the number 600851475143L ?
   def main(args: Array[String]) = {
     var target = 600851475143L
     var answer = 0L
