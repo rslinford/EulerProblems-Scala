@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 object EulerProblem003 {
 
   def testAnswer(anAnswer: Long): Unit = {
@@ -10,6 +12,7 @@ object EulerProblem003 {
     }
   }
 
+  @tailrec
   def isPrimeUglyVersionRecursive(n:Long): Boolean = {
     var p = 3L
     if (n == 1) {
@@ -22,21 +25,21 @@ object EulerProblem003 {
       return false
     }
 
-    return isPrimeUglyVersionRecursive(n%2);
+    return isPrimeUglyVersionRecursive(n%2)
   }
 
   // What is the largest prime factor of the number 600851475143L ?
-  def main(args: Array[String]) = {
+  def main(args: Array[String]): Unit = {
     var target = 600851475143L
     var answer = 0L
     var i = 0L
     var isFactor = false
-    var isPrime = false;
+    var isPrime = false
 
     i = target / 2 - 1 // half target to count backwards
     answer = 0L
     while (answer == 0) {
-      i -= 1;
+      i -= 1
       isFactor = target % i == 0
       if (i % 10000000001L == 0) {
         println("(" + i + ") isFactor(" + isFactor + ") isPrime(" + isPrimeUglyVersionRecursive(i) + ")")
