@@ -19,7 +19,7 @@ object EulerProblem004 {
     // A single digit is always palandrome
     if (n < 10) return true
 
-    s = n.toString()
+    s = n.toString
     frontIndex = 0
     backIndex = s.length - 1
     if (s.charAt(frontIndex) != s.charAt(backIndex)) return false
@@ -54,7 +54,6 @@ object EulerProblem004 {
       if (isPalandrome){
         if (prod > answer) answer = prod
         println("a(" + a + ") X b(" + b +") = prod(" +  prod + ") isPalandrome(" + isPalandrome + ") answer(" + answer + ")")
-
       }
     }
 
