@@ -26,9 +26,9 @@ object EulerProblem008 {
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 
-Find the thirteen adjacent digits in the 1000-digit number
-that have the greatest product. What is the value of this
-product?
+    Find the thirteen adjacent digits in the 1000-digit number
+    that have the greatest product. What is the value of this
+    product?
 
 Answer: 23514624000
 */
@@ -43,10 +43,36 @@ Answer: 23514624000
     }
   }
 
-  def main(args: Array[String]): Unit = {
-    var answer = 0
-    var i = 0
+  def productOfDigits(bigNumber: String, startIndex: Int ): Long = {
+    var xChar = '0'
+    var xInt = 0L
+    var product = 1L
+    for (i <- 0 to 3) {
+      xChar = bigNumber.charAt(startIndex + i)
+      xInt = xChar - '0'
+      product *= xInt
+    }
+    product
+  }
 
+  def main(args: Array[String]): Unit = {
+    val NUMBER_OF_DIGITS_FOR_PRODUCT = 4
+    var product = 0L
+    var answer = 0L
+    var greatestProductSoFar = 0L
+    var i = 0
+    // TODO: change to real 1000 digit number
+    val THOUSAND_DIGIT_NUMBER = "1234129939412993949912934999192934919999234"
+    for (i <- 0 to THOUSAND_DIGIT_NUMBER.length - NUMBER_OF_DIGITS_FOR_PRODUCT) {
+      product = productOfDigits(THOUSAND_DIGIT_NUMBER, i)
+      if (greatestProductSoFar < product) {
+        greatestProductSoFar = product
+        println("i(" + i + ") charAt(" + THOUSAND_DIGIT_NUMBER.charAt(i) + ") product(" +
+          product + ")")
+      }
+    }
+
+    answer = greatestProductSoFar
     testAnswer(answer)
   }
 
