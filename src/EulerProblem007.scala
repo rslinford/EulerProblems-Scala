@@ -18,20 +18,45 @@ object EulerProblem007 {
     }
   }
 
-  @tailrec
-  def isPrimeUglyVersionRecursive(n:Long): Boolean = {
-    var p = 3L
+  def isPrimeUglyVersionHelper(n:Long): Boolean = {
+    var potentialFactor = n
+    while (potentialFactor > 2) {
+      potentialFactor -= 1
+      // Return false if factor is found
+      if (n % potentialFactor == 0) {
+        // A factor was found therefore not prime.
+        return false
+      }
+    }
+    // No factors found. It's prime.
+    true
+  }
+
+  def isPrimeUglyVersion(n:Long): Boolean = {
+    var p = 0L
+    var isPrime = false
+
     if (n == 1 || n == 0) {
       return false
-    } else if (n == 2) {
+    } else if (n == 2 || n == 3) {
       return true
     }
 
+    // Test is even
     if (n % 2 == 0) {
       return false
     }
 
-    isPrimeUglyVersionRecursive(n%2)
+    isPrime = isPrimeUglyVersionHelper(n)
+    if (isPrime) {
+      return true
+    }
+
+    if (isPrime) {
+      return true
+    }
+
+    isPrime
   }
 
   def main(args: Array[String]): Unit = {
@@ -41,11 +66,13 @@ object EulerProblem007 {
     var primeCount = 0
     var candidatePrime = 0
 
-    while (primeCount < 7) {
+    while (primeCount < 10001) {
       candidatePrime += 1
-      if (isPrimeUglyVersionRecursive(candidatePrime)) {
+      if (isPrimeUglyVersion(candidatePrime)) {
         primeCount += 1
-        println("primeCount(" + primeCount + ") candidatePrime(" + candidatePrime + ")")
+        if (primeCount < 10 || primeCount % 1000 == 0) {
+          println("primeCount(" + primeCount + ") candidatePrime(" + candidatePrime + ")")
+        }
       }
     }
     answer = candidatePrime
