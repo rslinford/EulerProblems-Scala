@@ -34,22 +34,18 @@ object EulerProblem006 {
   }
 
   def main(args: Array[String]): Unit = {
-    var answer = 20
+    var answer = 0
     var i = 0
-    var a = 0
-    var b = 0
+    var baseSum = 0
+    var powerSum  = 0
 
-    for (i <- 1 to 10) {
-      println("i(" + i + ") anAnswer(" + answer + ")")
+    for (i <- 1 to 100) {
+      baseSum += i
+      powerSum += i * i
+      println("i(" + i + ") anAnswer(" + answer + ") baseSum(" + baseSum + ") powerSum(" + powerSum + ")")
     }
 
-    while (!isSomeTest(answer)) {
-      answer += 1
-      if (answer % 7000001 == 0) {
-        println("anAnswer(" + answer + ")")
-      }
-    }
-
+    answer = baseSum * baseSum - powerSum
     testAnswer(answer)
   }
 
