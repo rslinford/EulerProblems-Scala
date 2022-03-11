@@ -13,7 +13,7 @@ object EulerProblem006 {
   Answer:  25164150
   */
   def testAnswer(anAnswer: Long): Unit = {
-    var knownAnswer = 25164150
+    val knownAnswer = 25164150
     println("anAnswer(" + anAnswer + ") knownAnswer(" + knownAnswer + ")")
     if (anAnswer == knownAnswer) {
       println("Yay!")
@@ -38,6 +38,10 @@ object EulerProblem006 {
     var i = 0
     var a = 0
     var b = 0
+
+    for (i <- 1 to 10) {
+      println("i(" + i + ") anAnswer(" + answer + ")")
+    }
 
     while (!isSomeTest(answer)) {
       answer += 1
