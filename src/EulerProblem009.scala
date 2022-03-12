@@ -6,11 +6,10 @@ object EulerProblem009 {
        a2 + b2 = c2
     For example:
        3^2 + 4^2 = 5^2
-
     There exists exactly one Pythagorean triplet for which a + b + c = 1000.
     Find the product abc.
 
-    Answer: 31875000
+  Answer: 31875000
   */
   def testAnswer(anAnswer: Long): Unit = {
     val knownAnswer = 31875000
