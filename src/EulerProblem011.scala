@@ -70,6 +70,25 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
     }
   }
 
+  /*
+  Learning Scala Arrays
+    Values printed ordered first from left to right then top to bottom
+    of grid.
+
+  Learning Scala print formatting. Powerful:
+      This was my solution of the top of my head:
+        println("a,b(" + a + "," + b + ") grid("+a+")[" + grid(a) + "] grid("+a+")("+b+")[" + grid(a)(b) + "]")
+      Verses this from Alvin Alexander's Scala Cookbook:
+        println(s"($a)($b) = ${grid(a)(b)}")
+      LOL
+  */
+  def printAllValues(g:Array[Array[Int]]): Unit = {
+    for {
+      a <- g(0).indices
+      b <- g.indices
+    } println(s"($a)($b) = ${g(a)(b)}")
+  }
+
   def main(args: Array[String]): Unit = {
     var answer = 0L
     val grid = Array(
@@ -94,19 +113,8 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
       Array(20,73,35,29,78,31,90, 1,74,31,49,71,48,86,81,16,23,57, 5,54),
       Array( 1,70,54,71,83,51,54,69,16,92,33,48,61,43,52, 1,89,19,67,48)
     )
+//    printAllValues(grid)
 
-    for {
-      a <- grid(0).indices
-      b <- grid.indices
-    } println(s"($a)($b) = ${grid(a)(b)}")
-
-    /*
-      A Scala language moment. This:
-        println("a,b(" + a + "," + b + ") grid("+a+")[" + grid(a) + "] grid("+a+")("+b+")[" + grid(a)(b) + "]")
-      Or this:
-        println(s"($a)($b) = ${grid(a)(b)}")
-      LOL
-     */
 
     answer = -1
     testAnswer(answer)
