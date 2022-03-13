@@ -135,9 +135,66 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
       g(y)(x) * g(y)(x-1) * g(y)(x-2) * g(y)(x-3)
       + ")")
   }
+  /*
+  Print the 8 lines (or fewer) that would radiate from the center point. Print
+  them safely via boundary checking.
+   */
+  def findLargestProductAlongStarLines(g:Array[Array[Int]], y:Int, x:Int): Long =  {
+    var largestProduct = 0L
+    var product = 0L
+
+    // Center example
+    println("=v= Star Line Products =v=")
+    println(f"Center $x%2d,$y%2d: ${g(y)(x)}%2d")
+    if (y > 2) {
+      if (x > 2) {
+        product = g(y)(x) * g(y - 1)(x - 1) * g(y - 2)(x - 2) * g(y - 3)(x - 3)
+        if (product > largestProduct) largestProduct = product
+        println(f"${g(y)(x)}%2d ${g(y - 1)(x - 1)}%2d ${g(y - 2)(x - 2)}%2d ${g(y - 3)(x - 3)}%2d product(" + product + ")")
+      }
+      product = g(y)(x) * g(y - 1)(x) * g(y - 2)(x) * g(y - 3)(x)
+      if (product > largestProduct) largestProduct = product
+      println(f"${g(y)(x)}%2d ${g(y - 1)(x)}%2d ${g(y - 2)(x)}%2d ${g(y - 3)(x)}%2d product(" + product + ")")
+      if (x < 17) {
+        product = g(y)(x) * g(y - 1)(x + 1) * g(y - 2)(x + 2) * g(y - 3)(x + 3)
+        if (product > largestProduct) largestProduct = product
+        println(f"${g(y)(x)}%2d ${g(y - 1)(x + 1)}%2d ${g(y - 2)(x + 2)}%2d ${g(y - 3)(x + 3)}%2d product(" + product + ")")
+      }
+    }
+    if (x < 17) {
+      product = g(y)(x) * g(y)(x+1) * g(y)(x+2) * g(y)(x+3)
+      if (product > largestProduct) largestProduct = product
+      println(f"${g(y)(x)}%2d ${g(y)(x+1)}%2d ${g(y)(x+2)}%2d ${g(y)(x+3)}%2d product(" + product + ")")
+    }
+    if (y < 17) {
+      if (x < 17) {
+        product = g(y)(x) * g(y + 1)(x + 1) * g(y + 2)(x + 2) * g(y + 3)(x + 3)
+        if (product > largestProduct) largestProduct = product
+        println(f"${g(y)(x)}%2d ${g(y + 1)(x + 1)}%2d ${g(y + 2)(x + 2)}%2d ${g(y + 3)(x + 3)}%2d product(" + product + ")")
+      }
+      product = g(y)(x) * g(y + 1)(x) * g(y + 2)(x) * g(y + 3)(x)
+      if (product > largestProduct) largestProduct = product
+      println(f"${g(y)(x)}%2d ${g(y + 1)(x)}%2d ${g(y + 2)(x)}%2d ${g(y + 3)(x)}%2d product(" + product + ")")
+      if (x > 2) {
+        product = g(y)(x) * g(y + 1)(x - 1) * g(y + 2)(x - 2) * g(y + 3)(x - 3)
+        if (product > largestProduct) largestProduct = product
+        println(f"${g(y)(x)}%2d ${g(y + 1)(x - 1)}%2d ${g(y + 2)(x - 2)}%2d ${g(y + 3)(x - 3)}%2d product(" + g(y)(x) * g(y + 1)(x - 1) * g(y + 2)(x - 2) * g(y + 3)(x - 3)
+          + ")")
+      }
+    }
+    if (x > 2) {
+      product = g(y)(x) * g(y)(x-1) * g(y)(x-2) * g(y)(x-3)
+      if (product > largestProduct) largestProduct = product
+      println(f"${g(y)(x)}%2d ${g(y)(x-1)}%2d ${g(y)(x-2)}%2d ${g(y)(x-3)}%2d product(" + product + ")")
+    }
+
+    println("largestProduct(" + largestProduct + ")")
+    largestProduct
+  }
 
   def main(args: Array[String]): Unit = {
     var answer = 0L
+    var largestProduct = 0L
     val grid = Array(
       Array( 8, 2,22,97,38,15, 0,40, 0,75, 4, 5, 7,78,52,12,50,77,91, 8),
       Array(49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48, 4,56,62, 0),
@@ -164,20 +221,19 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
     println("=v= 20 x 20 Grid =v=")
     printAllValuesAsGrid(grid)
     println("=^= 20 x 20 Grid =^=")
-    printValidStarLines(grid, 3, 3)
-    printValidStarLines(grid, 16, 16)
-    printValidStarLines(grid, 2,2)
-    printValidStarLines(grid, 17, 2)
-    printValidStarLines(grid, 17, 17)
-    printValidStarLines(grid, 2, 17)
-//    for (a <- grid(0).indices; b <- grid.indices) {
-//      if (b == 0 && a > 0) println
-//      print(f"${grid(a)(b)}%2d ")
-//    }
-//    println
+    for (a <- grid(0).indices; b <- grid.indices) {
+      if (b == 0 && a > 0) println
+      val product = findLargestProductAlongStarLines(grid, a, b)
+      if (product > largestProduct) {
+        largestProduct = product
+      }
+      answer = largestProduct
+      print(f"${grid(a)(b)}%2d largestProduct(" + largestProduct + ")")
+    }
+    println
     println
 
-    answer = -1
+    answer = largestProduct
     testAnswer(answer)
   }
 
