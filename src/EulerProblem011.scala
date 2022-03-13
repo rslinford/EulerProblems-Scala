@@ -96,23 +96,44 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
     }
     println
   }
+
+  /*
+  Print the 8 lines (or fewer) that would radiate from the center point. Print
+  them safely via boundary checking.
+   */
   def printValidStarLines(g:Array[Array[Int]], y:Int, x:Int): Unit =  {
     // Center example
     println("=v= Star Coordinates =v=")
     println(f"Center $x%2d,$y%2d: ${g(y)(x)}%2d")
     if (y > 2) {
-      if (x > 2) println(f"${g(y)(x)}%2d ${g(y - 1)(x - 1)}%2d ${g(y - 2)(x - 2)}%2d ${g(y - 3)(x - 3)}%2d")
-      println(f"${g(y)(x)}%2d ${g(y - 1)(x)}%2d ${g(y - 2)(x)}%2d ${g(y - 3)(x)}%2d")
-      if (x < 17) println(f"${g(y)(x)}%2d ${g(y - 1)(x + 1)}%2d ${g(y - 2)(x + 2)}%2d ${g(y - 3)(x + 3)}%2d")
+      if (x > 2) println(f"${g(y)(x)}%2d ${g(y - 1)(x - 1)}%2d ${g(y - 2)(x - 2)}%2d ${g(y - 3)(x - 3)}%2d product(" +
+        g(y)(x) * g(y - 1)(x - 1) * g(y - 2)(x - 2) * g(y - 3)(x - 3) +
+        ")")
+      println(f"${g(y)(x)}%2d ${g(y - 1)(x)}%2d ${g(y - 2)(x)}%2d ${g(y - 3)(x)}%2d product(" +
+        g(y)(x) * g(y - 1)(x) * g(y - 2)(x) * g(y - 3)(x)
+        + ")")
+      if (x < 17) println(f"${g(y)(x)}%2d ${g(y - 1)(x + 1)}%2d ${g(y - 2)(x + 2)}%2d ${g(y - 3)(x + 3)}%2d product(" +
+        g(y)(x) * g(y - 1)(x + 1) * g(y - 2)(x + 2) * g(y - 3)(x + 3)
+        + ")")
     }
-    if (x < 17) println(f"${g(y)(x)}%2d ${g(y)(x+1)}%2d ${g(y)(x+2)}%2d ${g(y)(x+3)}%2d")
+    if (x < 17) println(f"${g(y)(x)}%2d ${g(y)(x+1)}%2d ${g(y)(x+2)}%2d ${g(y)(x+3)}%2d product(" +
+      g(y)(x) * g(y)(x+1) * g(y)(x+2) * g(y)(x+3)
+      + ")")
 
     if (y < 17) {
-      if (x < 17) println(f"${g(y)(x)}%2d ${g(y + 1)(x + 1)}%2d ${g(y + 2)(x + 2)}%2d ${g(y + 3)(x + 3)}%2d")
-      println(f"${g(y)(x)}%2d ${g(y + 1)(x)}%2d ${g(y + 2)(x)}%2d ${g(y + 3)(x)}%2d")
-      if (x > 2) println(f"${g(y)(x)}%2d ${g(y + 1)(x - 1)}%2d ${g(y + 2)(x - 2)}%2d ${g(y + 3)(x - 3)}%2d")
+      if (x < 17) println(f"${g(y)(x)}%2d ${g(y + 1)(x + 1)}%2d ${g(y + 2)(x + 2)}%2d ${g(y + 3)(x + 3)}%2d product(" +
+        g(y)(x) * g(y + 1)(x + 1) * g(y + 2)(x + 2) * g(y + 3)(x + 3)
+        + ")")
+      println(f"${g(y)(x)}%2d ${g(y + 1)(x)}%2d ${g(y + 2)(x)}%2d ${g(y + 3)(x)}%2d product(" +
+        g(y)(x) * g(y + 1)(x) * g(y + 2)(x) * g(y + 3)(x)
+        + ")")
+      if (x > 2) println(f"${g(y)(x)}%2d ${g(y + 1)(x - 1)}%2d ${g(y + 2)(x - 2)}%2d ${g(y + 3)(x - 3)}%2d product(" +
+        g(y)(x) * g(y + 1)(x - 1) * g(y + 2)(x - 2) * g(y + 3)(x - 3)
+        + ")")
     }
-    if (x > 2) println(f"${g(y)(x)}%2d ${g(y)(x-1)}%2d ${g(y)(x-2)}%2d ${g(y)(x-3)}%2d")
+    if (x > 2) println(f"${g(y)(x)}%2d ${g(y)(x-1)}%2d ${g(y)(x-2)}%2d ${g(y)(x-3)}%2d product(" +
+      g(y)(x) * g(y)(x-1) * g(y)(x-2) * g(y)(x-3)
+      + ")")
   }
 
   def main(args: Array[String]): Unit = {
@@ -149,11 +170,11 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
     printValidStarLines(grid, 17, 2)
     printValidStarLines(grid, 17, 17)
     printValidStarLines(grid, 2, 17)
-    for (a <- grid(0).indices; b <- grid.indices) {
-      if (b == 0 && a > 0) println
-      print(f"${grid(a)(b)}%2d ")
-    }
-    println
+//    for (a <- grid(0).indices; b <- grid.indices) {
+//      if (b == 0 && a > 0) println
+//      print(f"${grid(a)(b)}%2d ")
+//    }
+//    println
     println
 
     answer = -1
