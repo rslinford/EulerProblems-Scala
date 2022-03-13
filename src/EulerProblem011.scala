@@ -96,6 +96,24 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
     }
     println
   }
+  def printValidStarLines(g:Array[Array[Int]], y:Int, x:Int): Unit =  {
+    // Center example
+    println("=v= Star Coordinates =v=")
+    println(f"Center $x%2d,$y%2d: ${g(y)(x)}%2d")
+    if (y > 2) {
+      if (x > 2) println(f"${g(y)(x)}%2d ${g(y - 1)(x - 1)}%2d ${g(y - 2)(x - 2)}%2d ${g(y - 3)(x - 3)}%2d")
+      println(f"${g(y)(x)}%2d ${g(y - 1)(x)}%2d ${g(y - 2)(x)}%2d ${g(y - 3)(x)}%2d")
+      if (x < 17) println(f"${g(y)(x)}%2d ${g(y - 1)(x + 1)}%2d ${g(y - 2)(x + 2)}%2d ${g(y - 3)(x + 3)}%2d")
+    }
+    if (x < 17) println(f"${g(y)(x)}%2d ${g(y)(x+1)}%2d ${g(y)(x+2)}%2d ${g(y)(x+3)}%2d")
+
+    if (y < 17) {
+      if (x < 17) println(f"${g(y)(x)}%2d ${g(y + 1)(x + 1)}%2d ${g(y + 2)(x + 2)}%2d ${g(y + 3)(x + 3)}%2d")
+      println(f"${g(y)(x)}%2d ${g(y + 1)(x)}%2d ${g(y + 2)(x)}%2d ${g(y + 3)(x)}%2d")
+      if (x > 2) println(f"${g(y)(x)}%2d ${g(y + 1)(x - 1)}%2d ${g(y + 2)(x - 2)}%2d ${g(y + 3)(x - 3)}%2d")
+    }
+    if (x > 2) println(f"${g(y)(x)}%2d ${g(y)(x-1)}%2d ${g(y)(x-2)}%2d ${g(y)(x-3)}%2d")
+  }
 
   def main(args: Array[String]): Unit = {
     var answer = 0L
@@ -125,25 +143,18 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
     println("=v= 20 x 20 Grid =v=")
     printAllValuesAsGrid(grid)
     println("=^= 20 x 20 Grid =^=")
-
+    printValidStarLines(grid, 3, 3)
+    printValidStarLines(grid, 16, 16)
+    printValidStarLines(grid, 2,2)
+    printValidStarLines(grid, 17, 2)
+    printValidStarLines(grid, 17, 17)
+    printValidStarLines(grid, 2, 17)
     for (a <- grid(0).indices; b <- grid.indices) {
       if (b == 0 && a > 0) println
       print(f"${grid(a)(b)}%2d ")
     }
     println
     println
-    // Center example
-    println("=v= Star Coordinates =v=")
-    println(s"Center 3,3: ${grid(3)(3)}")
-
-    println(f"${grid(3)(3)}%2d ${grid(2)(2)}%2d ${grid(1)(1)}%2d ${grid(0)(0)}%2d")
-    println(f"${grid(3)(3)}%2d ${grid(2)(3)}%2d ${grid(1)(3)}%2d ${grid(0)(3)}%2d")
-    println(f"${grid(3)(3)}%2d ${grid(2)(4)}%2d ${grid(1)(5)}%2d ${grid(0)(6)}%2d")
-    println(f"${grid(3)(3)}%2d ${grid(3)(4)}%2d ${grid(3)(5)}%2d ${grid(3)(6)}%2d")
-    println(f"${grid(3)(3)}%2d ${grid(4)(4)}%2d ${grid(5)(5)}%2d ${grid(6)(6)}%2d")
-    println(f"${grid(3)(3)}%2d ${grid(4)(3)}%2d ${grid(5)(3)}%2d ${grid(6)(3)}%2d")
-    println(f"${grid(3)(3)}%2d ${grid(4)(2)}%2d ${grid(5)(1)}%2d ${grid(6)(0)}%2d")
-    println(f"${grid(3)(3)}%2d ${grid(3)(2)}%2d ${grid(3)(1)}%2d ${grid(3)(0)}%2d")
 
     answer = -1
     testAnswer(answer)
